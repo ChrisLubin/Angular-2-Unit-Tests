@@ -1,18 +1,19 @@
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 export class TodoService {
   constructor(private httpClient: HttpClient) {
   }
 
-  add(todo) {
-    return this.httpClient.post('...', todo);
+  add(todo: any): Observable<any> {
+    return this.httpClient.post<any>('...', todo);
   }
 
-  getTodos() {
-    return this.httpClient.get('...');
+  getTodos(): Observable<any> {
+    return this.httpClient.get<any>('...');
   }
 
-  delete(id) {
-    return this.httpClient.delete('...');
+  delete(id: number): Observable<any> {
+    return this.httpClient.delete<any>('...');
   }
 }

@@ -1,4 +1,4 @@
 
-export function getCurrencies() { 
+export function getCurrencies(): string[] {
   return ['USD', 'AUD', 'EUR'];
 }

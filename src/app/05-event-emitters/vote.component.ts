@@ -1,11 +1,11 @@
 
-import { EventEmitter } from '@angular/core'; 
+import { EventEmitter } from '@angular/core';
 
-export class VoteComponent { 
-  totalVotes = 0; 
-  voteChanged = new EventEmitter();
+export class VoteComponent {
+  public totalVotes = 0;
+  public voteChanged = new EventEmitter<number>();
 
-  upVote() { 
+  upVote(): void {
     this.totalVotes++;
     this.voteChanged.emit(this.totalVotes);
   }
