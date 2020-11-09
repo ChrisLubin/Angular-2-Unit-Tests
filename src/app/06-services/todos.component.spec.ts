@@ -26,4 +26,45 @@ describe('TodosComponent', () => {
     // Assert
     expect(component.todos).toBe(todos);
   });
+
+  it('should call the api to save the changes when a new todo item is added', () => {
+    // Arrage
+    const spy = spyOn(service, 'add').and.callFake(todo => {
+      return new Observable();
+    });
+
+    // Act
+    component.add();
+
+    // Assert
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should add the new todo returned from the server', () => {
+    // Arrage
+    const todo = { id: 1 };
+    spyOn(service, 'add').and.returnValue(new Observable(subscriber => {
+      subscriber.next(todo);
+    }));
+
+    // Act
+    component.add();
+
+    // Assert
+    expect(component.todos[component.todos.length - 1]).toBe(todo);
+  });
+
+  it('should set the message property if the api returns an error when adding a todo', () => {
+    // Arrage
+    const error = 'error from the api';
+    spyOn(service, 'add').and.returnValue(new Observable(subscriber => {
+      subscriber.error(error);
+    }));
+
+    // Act
+    component.add();
+
+    // Assert
+    expect(component.message).toBe(error);
+  });
 });
