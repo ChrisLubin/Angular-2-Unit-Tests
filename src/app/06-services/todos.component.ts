@@ -8,18 +8,18 @@ export class TodosComponent implements OnInit {
 
   constructor(private service: TodoService) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.service.getTodos().subscribe(t => this.todos = t);
   }
 
-  add(): void {
+  public add(): void {
     const newTodo = { title: '... ' };
     this.service.add(newTodo).subscribe(
       t => this.todos.push(t),
       err => this.message = err);
   }
 
-  delete(id: number): void {
+  public delete(id: number): void {
     if (confirm('Are you sure?')){
       this.service.delete(id).subscribe();
     }
